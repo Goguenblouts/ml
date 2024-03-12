@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatorios ML - Eletropel</title>
+</head>
+<body>
+    <div id="tela3" class="oculto">
+        <h2>Devoluções Mercado Livre</h2>
+        <div id="currentDate3"></div>
+
+        <table id="returnsTable">
+            <thead>
+                <tr>
+                    <th>Código do Cliente</th>
+                    <th>Cliente</th>
+                    <th>Número da Nota</th>
+                    <th>Valor da Nota</th>
+                    <th>Valor Recebido</th>
+                    <th>Desconto</th>
+                    <th>Transferido</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aqui você pode adicionar as linhas conforme necessário -->
+            </tbody>
+        </table>
+
+        <div id="totalReturned"></div>
+
+        <button onclick="addReturn()">Adicionar Devolução</button>
+        <button onclick="exportToGoogleSheets()">Exportar para Planilha</button>
+        <button onclick="printTable()">Imprimir Tabela</button>
+        <button onclick="backpage()">Voltar</button>
+    </div>    
+</body>
+</html>
