@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios ML - Eletropel</title>
+    <!-- Incluir o CSS das Telas -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Conteúdo da Tela 1-->
+  <div id="tela1" class="tela">
+    <h2>O que deseja fazer?</h2>
+    <button id="botaoOpcao1">Registrar Vendas ML</button>
+    <button id="botaoOpcao2">Registrar Devoluções ML</button>
+    <button id="botaoOpcao3">Registrar Transf. ML</button>
+  </div>
+  
+  <div id="tela2" class="oculto">
+    <h2>Vendas Mercado Livre</h2>
+    <div id="currentDate2"></div>
+
+    <table id="salesTable">
+        <thead>
+            <tr>
+                <th>Código do Cliente</th>
+                <th>Cliente</th>
+                <th>Número da Nota</th>
+                <th>Valor da Nota</th>
+                <th>Valor Recebido</th>
+                <th>Desconto</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aqui você pode adicionar as linhas conforme necessário -->
+        </tbody>
+    </table>
+
+    <div id="totalReceived"></div>
+
+    <button onclick="addSale()">Adicionar Venda</button>
+    <button onclick="exportToGoogleSheets()">Exportar para Planilha</button>
+    <button onclick="printTable()">Imprimir Tabela</button>
+    <button onclick="backpage()">Voltar</button>
+</div>    
+
+<div id="tela3" class="oculto">
+  <h2>Devoluções Mercado Livre</h2>
+  <div id="currentDate3"></div>
+
+  <table id="returnsTable">
+      <thead>
+          <tr>
+              <th>Código do Cliente</th>
+              <th>Cliente</th>
+              <th>Número da Nota</th>
+              <th>Valor da Nota</th>
+              <th>Valor Recebido</th>
+              <th>Desconto</th>
+              <th>Transferido</th>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- Aqui você pode adicionar as linhas conforme necessário -->
+      </tbody>
+  </table>
+
+  <div id="totalReturned"></div>
+
+  <button onclick="addReturn()">Adicionar Devolução</button>
+  <button onclick="exportToGoogleSheets()">Exportar para Planilha</button>
+  <button onclick="printTable()">Imprimir Tabela</button>
+  <button onclick="backpage()">Voltar</button>
+</div>    
+
+<div id="tela4" class="oculto">
+  <h2>Transferências Vendas ML</h2>
+  <div id="currentDate4"></div>
+
+  <table id="salesTable4">
+      <thead>
+          <tr>
+            <th>Código do Cliente</th>
+            <th>Cliente</th>
+            <th>Número da Nota</th>
+            <th>Valor da Nota</th>
+            <th>Valor Recebido</th>
+            <th>Desconto</th>
+          </tr>
+      </thead>
+      <tbody>
+          <!-- Aqui você pode adicionar as linhas conforme necessário -->
+      </tbody>
+  </table>
+
+  <div id="totalReceived4"></div>
+
+  <button onclick="addSaleTela4()">Adicionar Venda</button>
+  <button onclick="exportToGoogleSheets()">Exportar para Planilha</button>
+  <button onclick="printTable()">Imprimir Tabela</button>
+  <button onclick="backpage()">Voltar</button>
+</div>
+
+  <!-- Incluir o JavaScript das Telas -->
+  <script>
+            // Referências aos elementos HTML
+            const tela1 = document.getElementById('tela1');
+        const tela2 = document.getElementById('tela2');
+        const tela3 = document.getElementById('tela3');
+        const tela4 = document.getElementById('tela4');
+
+        const botaoOpcao1 = document.getElementById('botaoOpcao1');
+        const botaoOpcao2 = document.getElementById('botaoOpcao2');
+        const botaoOpcao3 = document.getElementById('botaoOpcao3');
+
+        // Adicionando eventos aos botões
+        botaoOpcao1.addEventListener('click', function() {
+            tela1.classList.add('oculto');
+            tela2.classList.remove('oculto');
+        });
+
+        botaoOpcao2.addEventListener('click', function() {
+            tela1.classList.add('oculto');
+            tela3.classList.remove('oculto');
+        });
+
+        botaoOpcao3.addEventListener('click', function() {
+            tela1.classList.add('oculto');
+            tela4.classList.remove('oculto');
+        });
+
+        // Função para voltar à tela anterior
+        function backpage() {
+            const telas = [tela1, tela2, tela3, tela4];
+            for (let i = 0; i < telas.length; i++) {
+                if (!telas[i].classList.contains('oculto')) {
+                    telas[i].classList.add('oculto');
+                    if (i > 0) {
+                        if (i === 1 || i === 2 || i === 3) {
+                            tela1.classList.remove('oculto');
+                        } else {
+                            telas[i - 1].classList.remove('oculto');
+                        }
+                    } else {
+                        telas[telas.length - 1].classList.remove('oculto');
+                    }
+                    break;
+                }
+            }
+        }
+
+        //Script tela 2
+
+                // Função para adicionar uma venda
+                function addSale() {
+                    const salesTable = document.getElementById('salesTable').getElementsByTagName('tbody')[0];
+                    const newRow = salesTable.insertRow();
+        
+                    // Adicionar células com campos de entrada para cada dado
+                    const cells = [];
+                    for (let i = 0; i < 6; i++) {
+                        cells.push(newRow.insertCell());
+                    }
+        
+                    // Células com campos de entrada para cada dado
+                    cells[0].innerHTML = '<input type="text" name="customerCode">';
+                    cells[1].innerHTML = '<input type="text" name="customerName">';
+                    cells[2].innerHTML = '<input type="text" name="invoiceNumber">';
+                    cells[3].innerHTML = '<input type="number" step="0.01" name="invoiceValue" oninput="calculateDiscount(this)">';
+                    cells[4].innerHTML = '<input type="number" step="0.01" name="receivedValue" oninput="updateTotalReceived()">';
+                    cells[5].innerHTML = '<input type="text" name="discount">';
+                }
+        
+                function calculateDiscount(input) {
+                    const row = input.parentNode.parentNode;
+                    const invoiceValue = parseFloat(row.cells[3].querySelector('input').value);
+                    const receivedValue = parseFloat(row.cells[4].querySelector('input').value);
+                    const discount = invoiceValue - receivedValue;
+        
+                    // Atualizar o valor do campo de desconto
+                    row.cells[5].querySelector('input').value = discount.toFixed(2);
+                }
+        
+                function updateTotalReceived() {
+                    const rows = document.getElementById('salesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+                    let totalReceived = 0;
+        
+                    for (let i = 0; i < rows.length; i++) {
+                        const receivedValue = parseFloat(rows[i].cells[4].querySelector('input').value);
+                        totalReceived += isNaN(receivedValue) ? 0 : receivedValue;
+                    }
+        
+                    document.getElementById('totalReceived').textContent = 'Total Recebido: R$ ' + totalReceived.toFixed(2);
+                }
+        
+                function exportToGoogleSheets() {
+                    alert('Dados exportados com sucesso para o Google Sheets!');
+                }
+        
+                function printTable() {
+                    window.print();
+                }
+        
+                // Função para exibir a data atual
+                function getCurrentDate() {
+                    const now = new Date();
+                    const formattedDate = now.toLocaleDateString('pt-BR');
+                    document.getElementById('currentDate2').textContent = 'Data Transferência: ' + formattedDate;
+                }
+        
+                // Chamada da função para exibir a data atual ao carregar a página
+                getCurrentDate();
+
+                //Script tela 3
+
+                        // Função para adicionar uma devolução
+        function addReturn() {
+            const returnsTable = document.getElementById('returnsTable').getElementsByTagName('tbody')[0];
+            const newRow = returnsTable.insertRow();
+
+            // Adicionar células com campos de entrada para cada dado
+            const cells = [];
+            for (let i = 0; i < 7; i++) {
+                cells.push(newRow.insertCell());
+            }
+
+            // Células com campos de entrada para cada dado
+            cells[0].innerHTML = '<input type="text" name="customerCode">';
+            cells[1].innerHTML = '<input type="text" name="customerName">';
+            cells[2].innerHTML = '<input type="text" name="invoiceNumber">';
+            cells[3].innerHTML = '<input type="number" step="0.01" name="invoiceValue">';
+            cells[4].innerHTML = '<input type="number" step="0.01" name="returnedValue" oninput="updateTotalReturned()">';
+            cells[5].innerHTML = '<input type="text" name="returnReason">';
+            cells[6].innerHTML = '<input type="checkbox" name="transferred">';
+        }
+
+        function updateTotalReturned() {
+            const rows = document.getElementById('returnsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            let totalReturned = 0;
+
+            for (let i = 0; i < rows.length; i++) {
+                const returnedValue = parseFloat(rows[i].cells[4].querySelector('input').value);
+                totalReturned += isNaN(returnedValue) ? 0 : returnedValue;
+            }
+
+            document.getElementById('totalReturned').textContent = 'Total Devolvido: R$ ' + totalReturned.toFixed(2);
+        }
+
+        function exportToGoogleSheets() {
+            alert('Dados exportados com sucesso para o Google Sheets!');
+        }
+
+        function printTable() {
+            window.print();
+        }
+
+        // Função para exibir a data atual
+        function getCurrentDate() {
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString('pt-BR');
+            document.getElementById('currentDate3').textContent = 'Data Devolução: ' + formattedDate;
+        }
+
+        // Chamada da função para exibir a data atual ao carregar a página
+        getCurrentDate();
+
+    // Script tela 4
+
+    // Função para adicionar uma venda na tela 4
+    function addSaleTela4() {
+        const salesTable = document.getElementById('salesTable4').getElementsByTagName('tbody')[0];
+        const newRow = salesTable.insertRow();
+
+        // Adicionar células com campos de entrada para cada dado
+        const cells = [];
+        for (let i = 0; i < 6; i++) {
+            cells.push(newRow.insertCell());
+        }
+
+        // Células com campos de entrada para cada dado
+        cells[0].innerHTML = '<input type="text" name="customerCode">';
+        cells[1].innerHTML = '<input type="text" name="customerName">';
+        cells[2].innerHTML = '<input type="text" name="invoiceNumber">';
+        cells[3].innerHTML = '<input type="number" step="0.01" name="invoiceValue" oninput="calculateDiscount(this)">';
+        cells[4].innerHTML = '<input type="number" step="0.01" name="receivedValue" oninput="updateTotalReceivedTela4()">';
+        cells[5].innerHTML = '<input type="text" name="discount">';
+    }
+
+    function calculateDiscount(input) {
+        const row = input.parentNode.parentNode;
+        const invoiceValue = parseFloat(row.cells[3].querySelector('input').value);
+        const receivedValue = parseFloat(row.cells[4].querySelector('input').value);
+        const discount = invoiceValue - receivedValue;
+
+        // Atualizar o valor do campo de desconto
+        row.cells[5].querySelector('input').value = discount.toFixed(2);
+    }
+
+    function updateTotalReceivedTela4() {
+        const rows = document.getElementById('salesTable4').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        let totalReceived = 0;
+
+        for (let i = 0; i < rows.length; i++) {
+            const receivedValue = parseFloat(rows[i].cells[4].querySelector('input').value);
+            totalReceived += isNaN(receivedValue) ? 0 : receivedValue;
+        }
+
+        document.getElementById('totalReceived4').textContent = 'Total Recebido: R$ ' + totalReceived.toFixed(2);
+    }
+
+    function exportToGoogleSheets() {
+        alert('Dados exportados com sucesso para o Google Sheets!');
+    }
+
+    function printTable() {
+        window.print();
+    }
+
+    // Função para exibir a data atual na tela 4
+    function getCurrentDate() {
+        const now = new Date();
+        const formattedDate = now.toLocaleDateString('pt-BR');
+        document.getElementById('currentDate4').textContent = 'Data Transferência: ' + formattedDate;
+    }
+
+    // Chamada da função para exibir a data atual ao carregar a página na tela 4
+    getCurrentDate();
+  </script>
+</body>
+</html>
