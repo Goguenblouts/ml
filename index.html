@@ -6,7 +6,24 @@
     <title>Relatórios ML - Eletropel</title>
     <!-- Incluir o CSS das Telas -->
     <link rel="stylesheet" href="style.css">
-</head>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        function iniciarAPI() {
+            gapi.load('client', iniciarCliente);
+        }
+
+        function iniciarCliente() {
+            gapi.client.init({
+                apiKey: 'AIzaSyBAOj9gIYyX8GUPJYMfMR_XS3Pq9uULSyw'
+            }).then(function() {
+                console.log('API do Google Sheets autenticada com sucesso!');
+                // Aqui você pode chamar funções para manipular sua planilha
+            }, function(error) {
+                console.error('Erro ao autenticar API do Google Sheets:', error);
+            });
+        }
+    </script>
+  </head>
 <body>
   <!-- Conteúdo da Tela 1-->
   <div id="tela1" class="tela">
