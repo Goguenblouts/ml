@@ -46,7 +46,7 @@ button:hover {
     margin-bottom: 20px;
 }
 .fixed-button {
-    position: relative;
+    position: fixed;
     bottom: 20px; /* Distância do topo */
     right: 20px; /* Distância da direita */
     z-index: 1000; /* Garante que o botão esteja acima de outros elementos */
