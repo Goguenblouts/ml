@@ -7,7 +7,6 @@
     <title>Relatórios ML - Eletropel</title>
     <!-- Incluir o CSS das Telas -->
     <link rel="stylesheet" href="style.css">
-    <script src="https://apis.google.com/js/api.js"></script>
 
 </head>
 
@@ -20,92 +19,24 @@
         <button id="botaoOpcao3">Registrar Transf. ML</button>
     </div>
 
+    <!-- Conteúdo da Tela 2-->
     <div id="tela2" class="oculto">
-        <h2>Vendas Mercado Livre</h2>
-        <div id="currentDate2"></div>
+            <iframe  src="https://docs.google.com/forms/d/e/1FAIpQLSfOCUJb0bfWxNnIndN2syYBJL9WbxooMzanW2RtgNfv-3du1g/viewform?embedded=true" width="1000" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+            <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
+        </div>
 
-        <table id="salesTable">
-            <thead>
-                <tr>
-                    <th>SKU</th>
-                    <th>VALOR</th>
-                    <th>QUANTIDADE</th>
-                    <th>NOME CLIENTE</th>
-                    <th>COD. CLIENTE</th>
-                    <th>NOTA FISCAL</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aqui você pode adicionar as linhas conforme necessário -->
-            </tbody>
-        </table>
-
-        <div id="totalReceived"></div>
-
-        <button onclick="addSale()">Adicionar Venda</button>
-        <button onclick="exportSalesToGoogleSheets()">Exportar para Planilha</button>
-        <button onclick="printTable()">Imprimir Tabela</button>
-        <button onclick="backpage()">Voltar</button>
-    </div>
-
+    <!-- Conteúdo da Tela 3-->
     <div id="tela3" class="oculto">
-        <h2>Devoluções Mercado Livre</h2>
-        <div id="currentDate3"></div>
-
-        <table id="returnsTable">
-            <thead>
-                <tr>
-                    <th>Código do Cliente</th>
-                    <th>Cliente</th>
-                    <th>Número da Nota</th>
-                    <th>Valor da Nota</th>
-                    <th>Valor Recebido</th>
-                    <th>Desconto</th>
-                    <th>Transferido</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aqui você pode adicionar as linhas conforme necessário -->
-            </tbody>
-        </table>
-
-        <div id="totalReturned"></div>
-
-        <button onclick="addReturn()">Adicionar Devolução</button>
-        <button onclick="exportToGoogleSheets()">Exportar para Planilha</button>
-        <button onclick="printTable()">Imprimir Tabela</button>
-        <button onclick="backpage()">Voltar</button>
+            <iframe  src="https://docs.google.com/forms/d/e/1FAIpQLSe10FKGKsLWcFwhMBNNuIvwvUtAJIHkKozpP27LEAgxGFseqw/viewform?embedded=true" width="700" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+            <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
     </div>
 
+    <!-- Conteúdo da Tela 4-->
     <div id="tela4" class="oculto">
-        <h2>Transferências Vendas ML</h2>
-        <div id="currentDate4"></div>
-
-        <table id="salesTable4">
-            <thead>
-                <tr>
-                    <th>Código do Cliente</th>
-                    <th>Cliente</th>
-                    <th>Número da Nota</th>
-                    <th>Valor da Nota</th>
-                    <th>Valor Recebido</th>
-                    <th>Desconto</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Aqui você pode adicionar as linhas conforme necessário -->
-            </tbody>
-        </table>
-
-        <div id="totalReceived4"></div>
-
-        <button onclick="addSaleTela4()">Adicionar Venda</button>
-        <button onclick="exportToGoogleSheets()">Exportar para Planilha</button>
-        <button onclick="printTable()">Imprimir Tabela</button>
-        <button onclick="backpage()">Voltar</button>
+            <iframe  src="https://docs.google.com/forms/d/e/1FAIpQLSezQVmMBfvigt8Hh-00I240JVOXlC1cO7_pPqWBK7kRlb-NSg/viewform?embedded=true" width="700" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+            <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
     </div>
 
-    <!-- Incluir o JavaScript das Telas -->
     <script>
         // Referências aos elementos HTML
         const tela1 = document.getElementById('tela1');
@@ -134,140 +65,12 @@
         });
 
         // Função para voltar à tela anterior
-        function backpage() {
-            const telas = [tela1, tela2, tela3, tela4];
-            for (let i = 0; i < telas.length; i++) {
-                if (!telas[i].classList.contains('oculto')) {
-                    telas[i].classList.add('oculto');
-                    if (i > 0) {
-                        if (i === 1 || i === 2 || i === 3) {
-                            tela1.classList.remove('oculto');
-                        } else {
-                            telas[i - 1].classList.remove('oculto');
-                        }
-                    } else {
-                        telas[telas.length - 1].classList.remove('oculto');
-                    }
-                    break;
-                }
-            }
+        function voltarAoInicio() {
+            tela2.classList.add('oculto');
+            tela3.classList.add('oculto');
+            tela4.classList.add('oculto');
+            tela1.classList.remove('oculto');
         }
-
-        // Função para exibir a data atual
-        function getCurrentDate() {
-            const now = new Date();
-            const formattedDate = now.toLocaleDateString('pt-BR');
-            document.getElementById('currentDate2').textContent = 'Data Transferência: ' + formattedDate;
-            document.getElementById('currentDate3').textContent = 'Data Devolução: ' + formattedDate;
-            document.getElementById('currentDate4').textContent = 'Data Transferência: ' + formattedDate;
-        }
-
-        // Chamada da função para exibir a data atual ao carregar a página
-        getCurrentDate();
-
-        // Função para adicionar uma venda
-        function addSale() {
-            addRow('salesTable', 6);
-        }
-
-        // Função para adicionar uma devolução
-        function addReturn() {
-            addRow('returnsTable', 7);
-        }
-
-        // Função para adicionar uma venda na tela 4
-        function addSaleTela4() {
-            addRow('salesTable4', 6);
-        }
-
-        // Função para adicionar uma linha em uma tabela
-        function addRow(tableId, numCells) {
-            const table = document.getElementById(tableId).getElementsByTagName('tbody')[0];
-            const newRow = table.insertRow();
-
-            // Adicionar células com campos de entrada para cada dado
-            for (let i = 0; i < numCells; i++) {
-                const cell = newRow.insertCell();
-                cell.innerHTML = `<input type="text" name="customerCode">`;
-            }
-        }
-
-        // Função para exportar os dados da tela 2 para o Google Sheets
-        function exportSalesToGoogleSheets() {
-            exportToGoogleSheets('salesTable', 'Vendas ML', 'A2:F2');
-        }
-
-        // Função para exportar os dados da tela 3 para o Google Sheets
-        function exportToGoogleSheets() {
-            exportToGoogleSheets('returnsTable', 'Devoluções ML', 'A2:G2');
-        }
-
-        // Função para exportar os dados da tela 4 para o Google Sheets
-        function exportToGoogleSheetsTela4() {
-            exportToGoogleSheets('salesTable4', 'Transferências Vendas ML', 'A2:F2');
-        }
-
-        // Função para exportar os dados de uma tabela para o Google Sheets
-        function exportToGoogleSheets(tableId, sheetName, range) {
-            // ID da planilha onde os dados serão inseridos
-            const spreadsheetId = '1FcQY4PRiUN-ElO7qr7yWCVky9oKLkskrGzHqEd3eo68';
-
-            // Obter os dados da tabela
-            const table = document.getElementById(tableId);
-            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-
-            // Formatar os dados para serem enviados para a planilha
-            const data = [];
-            for (let i = 0; i < rows.length; i++) {
-                const row = rows[i];
-                const rowData = [];
-                for (let j = 0; j < row.cells.length; j++) {
-                    rowData.push(row.cells[j].querySelector('input').value);
-                }
-                data.push(rowData);
-            }
-
-            // Chamar a API do Google Sheets para inserir os dados
-            gapi.client.sheets.spreadsheets.values.append({
-                spreadsheetId: spreadsheetId,
-                range: sheetName + '!' + range,  // onde os dados serão inseridos
-                valueInputOption: 'RAW',
-                resource: {
-                    values: data
-                }
-            }).then(function(response) {
-                console.log('Dados exportados com sucesso para o Google Sheets!');
-            }, function(error) {
-                console.error('Erro ao exportar dados para o Google Sheets:', error);
-            });
-        }
-
-        // Função para imprimir a tabela
-        function printTable() {
-            window.print();
-        }
-    </script>
-
-    <script>
-        // Função de inicialização da API
-        function initClient() {
-            // Inicialize a API do Google Sheets
-            gapi.client.init({
-                apiKey: 'AIzaSyB9Snh8WVuc7Pa8OsSobnnux5U2x8SpDRA',
-                discoveryDocs: ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-                clientId: '175067670643-0pi5hu558lr1qg6qer5qn1ac5h8vou8g.apps.googleusercontent.com',
-                scope: 'https://www.googleapis.com/auth/spreadsheets'
-            }).then(function() {
-                // API está pronta para ser usada
-                console.log('API do Google Sheets inicializada com sucesso!');
-            }, function(error) {
-                // Tratar erros de inicialização
-                console.error('Erro ao inicializar a API do Google Sheets:', error);
-            });
-        }
-
-        // Inicialize a API do Google Sheets
-        gapi.load('client', initClient);
     </script>
 </body>
 
