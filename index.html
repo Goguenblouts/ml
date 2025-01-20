@@ -5,9 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatórios ML - Eletropel</title>
-    <!-- Incluir o CSS das Telas -->
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
@@ -23,40 +21,40 @@
 
     <!-- Conteúdo da Tela 2-->
     <div id="tela2" class="oculto">
-            <iframe  src="https://docs.google.com/forms/d/e/1FAIpQLSfOCUJb0bfWxNnIndN2syYBJL9WbxooMzanW2RtgNfv-3du1g/viewform?embedded=true" width="1000" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-            <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
-        </div>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfOCUJb0bfWxNnIndN2syYBJL9WbxooMzanW2RtgNfv-3du1g/viewform?embedded=true" width="1000" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+        <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
+    </div>
 
     <!-- Conteúdo da Tela 3-->
     <div id="tela3" class="oculto">
-            <iframe  src="https://docs.google.com/forms/d/e/1FAIpQLSe10FKGKsLWcFwhMBNNuIvwvUtAJIHkKozpP27LEAgxGFseqw/viewform?embedded=true" width="700" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-            <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe10FKGKsLWcFwhMBNNuIvwvUtAJIHkKozpP27LEAgxGFseqw/viewform?embedded=true" width="700" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+        <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
     </div>
 
     <!-- Conteúdo da Tela 4-->
     <div id="tela4" class="oculto">
-            <iframe  src="https://docs.google.com/forms/d/e/1FAIpQLSezQVmMBfvigt8Hh-00I240JVOXlC1cO7_pPqWBK7kRlb-NSg/viewform?embedded=true" width="700" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-            <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSezQVmMBfvigt8Hh-00I240JVOXlC1cO7_pPqWBK7kRlb-NSg/viewform?embedded=true" width="700" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+        <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
     </div>
 
-        <!-- Conteúdo da Tela 5-->
-    <div id="tela4" class="oculto">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeTCHuWK4artndaAnH1dqmAxkYddu8CrP2DI4MQRSu-TOL3mg/viewform?embedded=true" width="700" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-            <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
+    <!-- Conteúdo da Tela 5-->
+    <div id="tela5" class="oculto">
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeTCHuWK4artndaAnH1dqmAxkYddu8CrP2DI4MQRSu-TOL3mg/viewform?embedded=true" width="700" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+        <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
     </div>
 
     <script>
-        // Referências aos elementos HTML
         const tela1 = document.getElementById('tela1');
         const tela2 = document.getElementById('tela2');
         const tela3 = document.getElementById('tela3');
         const tela4 = document.getElementById('tela4');
+        const tela5 = document.getElementById('tela5');
 
         const botaoOpcao1 = document.getElementById('botaoOpcao1');
         const botaoOpcao2 = document.getElementById('botaoOpcao2');
         const botaoOpcao3 = document.getElementById('botaoOpcao3');
+        const botaoOpcao5 = document.getElementById('botaoOpcao5');
 
-        // Adicionando eventos aos botões
         botaoOpcao1.addEventListener('click', function() {
             tela1.classList.add('oculto');
             tela2.classList.remove('oculto');
@@ -72,11 +70,16 @@
             tela4.classList.remove('oculto');
         });
 
-        // Função para voltar à tela anterior
+        botaoOpcao5.addEventListener('click', function() {
+            tela1.classList.add('oculto');
+            tela5.classList.remove('oculto');
+        });
+
         function voltarAoInicio() {
             tela2.classList.add('oculto');
             tela3.classList.add('oculto');
             tela4.classList.add('oculto');
+            tela5.classList.add('oculto');
             tela1.classList.remove('oculto');
         }
     </script>
