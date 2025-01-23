@@ -9,78 +9,79 @@
 </head>
 
 <body>
-    <!-- Conteúdo da Tela 1-->
+    <!-- Conteúdo da Tela 1 -->
     <div id="tela1" class="tela">
+        <img class="Fachada" 
+             src="https://eletropeldistribuidora.com.br/wp-content/webp-express/webp-images/doc-root/wp-content/uploads/2023/11/A-FRENTE-DA-LOJA-ELETROPEL.jpg.webp" 
+             alt="Fachada Eletropel">
         <h2>O que deseja fazer?</h2>
-        <button id="botaoOpcao1">Registrar Devoluçoes Site</button>
-        <button id="botaoOpcao4">Registrar Transf. Site</button>
-        <button id="botaoOpcao2">Registrar Devoluções ML</button>
-        <button id="botaoOpcao3">Registrar Transf. ML</button>
-        <button id="botaoOpcao5">Registrar Atividades</button>
+        <div class="grid-container">
+            <button id="botaoOpcao1">
+                <img src="https://github.com/Goguenblouts/ml/blob/main/icones/dev%20site.png?raw=true" alt="Devolução Site">
+                DEVOLUÇÃO SITE
+            </button>
+            <button id="botaoOpcao2">
+                <img src="https://github.com/Goguenblouts/ml/blob/main/icones/dev%20ml.png?raw=true" alt="Devolução ML">
+                DEVOLUÇÃO MERCADO LIVRE
+            </button>
+            <button id="botaoOpcao3">
+                <img src="https://github.com/Goguenblouts/ml/blob/main/icones/reg%20atv.png?raw=true" alt="Registro Atividades">
+                REGISTRO ATIVIDADES
+            </button>
+        </div>
     </div>
-
-    <!-- Conteúdo da Tela 2-->
+    <!-- Conteúdo da Tela 2 -->
     <div id="tela2" class="oculto">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfOCUJb0bfWxNnIndN2syYBJL9WbxooMzanW2RtgNfv-3du1g/viewform?embedded=true" width="1000" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfOCUJb0bfWxNnIndN2syYBJL9WbxooMzanW2RtgNfv-3du1g/viewform?embedded=true" width="700" height="1000" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+        </iframe>
         <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
     </div>
 
-    <!-- Conteúdo da Tela 3-->
+    <!-- Conteúdo da Tela 3 -->
     <div id="tela3" class="oculto">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe10FKGKsLWcFwhMBNNuIvwvUtAJIHkKozpP27LEAgxGFseqw/viewform?embedded=true" width="700" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe10FKGKsLWcFwhMBNNuIvwvUtAJIHkKozpP27LEAgxGFseqw/viewform?embedded=true" width="700" height="1000" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+        </iframe>
         <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
     </div>
 
-    <!-- Conteúdo da Tela 4-->
+    <!-- Conteúdo da Tela 4 -->
     <div id="tela4" class="oculto">
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSezQVmMBfvigt8Hh-00I240JVOXlC1cO7_pPqWBK7kRlb-NSg/viewform?embedded=true" width="700" height="1200" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
-        <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
-    </div>
-
-    <!-- Conteúdo da Tela 5-->
-    <div id="tela5" class="oculto">
         <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeTCHuWK4artndaAnH1dqmAxkYddu8CrP2DI4MQRSu-TOL3mg/viewform?embedded=true" width="700" height="1000" frameborder="0" marginheight="0" marginwidth="0">Carregando…</iframe>
+        </iframe>
         <button class="fixed-button" onclick="voltarAoInicio()">Voltar ao Início</button>
     </div>
 
     <script>
-        const tela1 = document.getElementById('tela1');
-        const tela2 = document.getElementById('tela2');
-        const tela3 = document.getElementById('tela3');
-        const tela4 = document.getElementById('tela4');
-        const tela5 = document.getElementById('tela5');
+        // Seleção dos elementos
+        const telas = {
+            tela1: document.getElementById('tela1'),
+            tela2: document.getElementById('tela2'),
+            tela3: document.getElementById('tela3'),
+            tela4: document.getElementById('tela4')
+        };
 
-        const botaoOpcao1 = document.getElementById('botaoOpcao1');
-        const botaoOpcao2 = document.getElementById('botaoOpcao2');
-        const botaoOpcao3 = document.getElementById('botaoOpcao3');
-        const botaoOpcao5 = document.getElementById('botaoOpcao5');
+        const botoes = {
+            botaoOpcao1: document.getElementById('botaoOpcao1'),
+            botaoOpcao2: document.getElementById('botaoOpcao2'),
+            botaoOpcao3: document.getElementById('botaoOpcao3')
+        };
 
-        botaoOpcao1.addEventListener('click', function() {
-            tela1.classList.add('oculto');
-            tela2.classList.remove('oculto');
-        });
+        // Função para troca de telas
+        function mostrarTela(telaAtivar) {
+            Object.values(telas).forEach(tela => tela.classList.add('oculto'));
+            if (telas[telaAtivar]) {
+                telas[telaAtivar].classList.remove('oculto');
+            }
+        }
 
-        botaoOpcao2.addEventListener('click', function() {
-            tela1.classList.add('oculto');
-            tela3.classList.remove('oculto');
-        });
+        // Adicionando eventos aos botões
+        if (botoes.botaoOpcao1) botoes.botaoOpcao1.addEventListener('click', () => mostrarTela('tela2'));
+        if (botoes.botaoOpcao2) botoes.botaoOpcao2.addEventListener('click', () => mostrarTela('tela3'));
+        if (botoes.botaoOpcao3) botoes.botaoOpcao3.addEventListener('click', () => mostrarTela('tela4'));
 
-        botaoOpcao3.addEventListener('click', function() {
-            tela1.classList.add('oculto');
-            tela4.classList.remove('oculto');
-        });
-
-        botaoOpcao5.addEventListener('click', function() {
-            tela1.classList.add('oculto');
-            tela5.classList.remove('oculto');
-        });
-
+        // Função para voltar ao início
         function voltarAoInicio() {
-            tela2.classList.add('oculto');
-            tela3.classList.add('oculto');
-            tela4.classList.add('oculto');
-            tela5.classList.add('oculto');
-            tela1.classList.remove('oculto');
+            mostrarTela('tela1');
         }
     </script>
 </body>
